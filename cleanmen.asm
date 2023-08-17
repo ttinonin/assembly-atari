@@ -16,9 +16,10 @@ Start:
 
 	lda #0		; A = 0
 	ldx #$FF	; X = #$FF
+	sta $FF		; make sure $FF is zeroed before the loop
 MemLoop:
-	sta $0,X	; Store the value of A inside mem addr of 0 + X
 	dex		; X--
+	sta $0,X	; Store the value of A inside mem addr of 0 + X
 	bne MemLoop	; Loop until X == 0 (Z is set)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
