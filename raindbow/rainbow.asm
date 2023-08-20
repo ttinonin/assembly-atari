@@ -34,3 +34,28 @@ LoopVBlank:
 	sta WSYNC
 	dex
 	bne LoopVBlank
+
+	lda #0
+	sta VBLANK
+
+	ldx #192
+LoopVisible:
+	stx COLUBK	; Set background color
+	sta WSYNC 	; Wait for the next scanline
+	dex
+	bne LoopVisible
+
+	lda #2
+	sta VBLANK
+
+	ldx #30
+LoopOverscan:
+	sta WSYNC
+	dex
+	bne LoopOverscan
+
+	jmp NextFrame
+
+	org $FFFC
+	.word Start
+	.word Start
